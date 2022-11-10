@@ -1,0 +1,25 @@
+@media screen and (max-width: 1366px) {
+    .model__navbar {
+        height: 590px;
+        width: 400px;
+        background-color: rgb(201, 222, 235);
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1920px) {
+    .model__navbar {
+        height: 780px;
+        width: 550px;
+        background-color: rgb(201, 222, 235);
+        transform: translateX(1110px);
+    }
+}
+
+.user__avatar {
+   height: 300px;
+   width: 300px;
+}
+
+.content__unit {
+    width: 800px;
+}
