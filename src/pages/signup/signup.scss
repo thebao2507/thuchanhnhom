@@ -1,0 +1,31 @@
+.modal__signup {
+    position: relative;
+    //transform: translateY(-35rem);
+    animation: modelFadeIn ease .8s;
+    font-family: 'ProximaNova', Arial, Tahoma, PingFangSC, sans-serif;
+    //font-family:Verdana, Geneva, Tahoma, sans-serif;
+    //font-family: 'Courier New', Courier, monospace;
+}
+
+.btn-signup{
+    letter-spacing: 2px;
+}
+
+.lb-text{
+    letter-spacing: 1px;
+}
+
+@keyframes modelFadeIn {
+    from {
+        transform: translateY(-35rem);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
+@media screen and (max-height: 768px){
+    .ctainer{
+        transform: translateY(35%);
+    }
+}
