@@ -29,12 +29,12 @@ const Main = () => {
                                 </div>
                                 <div className='flex flex-col ml-4'>
                                     <input
-                                        className='w-[420px] placeholder:text-slate-400 placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
+                                        className='w-[420px] placeholder:text-slate-400 placeholder:text-start placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
                                         placeholder="Account"
                                         type="text"
                                     />
                                     <input
-                                        className='w-[420px] placeholder:text-slate-400 placeholder:font-semibold translate-y-1/2 font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
+                                        className='w-[420px] placeholder:text-slate-400 placeholder:text-start placeholder:font-semibold translate-y-1/2 font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
                                         placeholder="Enter 6 character or more"
                                         type="text"
                                     />

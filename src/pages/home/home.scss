@@ -4,6 +4,9 @@
         width: 400px;
         background-color: rgb(201, 222, 235);
     }
+    .content__unit {
+        width: 850px;
+    }
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1920px) {
@@ -11,7 +14,9 @@
         height: 780px;
         width: 550px;
         background-color: rgb(201, 222, 235);
-        transform: translateX(1110px);
+    }
+    .content__unit {
+        width: 1150px;
     }
 }
 
@@ -20,6 +25,3 @@
    width: 300px;
 }
 
-.content__unit {
-    width: 800px;
-}

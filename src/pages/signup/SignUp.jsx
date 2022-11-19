@@ -25,7 +25,7 @@ const SignUp = () => {
                             <div className='pl-8 mb-4'>
                                 <label htmlFor="" className='text-lg font-semibold pr-8 translate-y-1/2 lb-text'>Account</label>
                                 <input
-                                    className='w-[420px] placeholder:text-slate-400 placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
+                                    className='w-[420px] placeholder:text-slate-400 placeholder:text-start placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
                                     placeholder="Account"
                                     type="text"
                                 />
@@ -33,7 +33,7 @@ const SignUp = () => {
                             <div className='pl-8 mb-4'>
                                 <label htmlFor="" className='text-lg font-semibold pr-5 translate-y-1/2 lb-text'>Password</label>
                                 <input
-                                    className='w-[420px] placeholder:text-slate-400 placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
+                                    className='w-[420px] placeholder:text-slate-400 placeholder:text-start placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
                                     placeholder="Enter 6 character or more"
                                     type="password"
                                 />
@@ -41,7 +41,7 @@ const SignUp = () => {
                             <div className='pl-8 mb-4'>
                                 <label htmlFor="" className='text-lg font-semibold pr-8 translate-y-1/2 lb-text'>Confirm</label>
                                 <input
-                                    className='w-[420px] placeholder:text-slate-400 placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
+                                    className='w-[420px] placeholder:text-slate-400 placeholder:text-start placeholder:font-semibold font-semibold text-slate-500 rounded-lg p-[10px] mt-1 border-2 border-slate-500'
                                     placeholder="Confirm password"
                                     type="password"
                                 />

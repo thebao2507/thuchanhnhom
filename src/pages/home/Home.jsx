@@ -1,7 +1,7 @@
 import Header from '../../components/header/Header';
 import './home.scss';
-import { AiFillCheckCircle } from 'react-icons/ai'
 import React from 'react';
+import ListUnit from '../../components/listUnit/ListUnit';
 
 const Home = () => {
     return (
@@ -9,13 +9,7 @@ const Home = () => {
             <div className='bg-white w-full h-full'>
                 <div className='mt-12 pt-2 mr-3 ml-10 flex justify-between'>
                     <div className='content__unit'>
-                        <div>
-                            <h1 className='text-2xl font-semibold'>Unit 1</h1>
-                            <div className='ml-4 w-full flex items-center justify-between'>
-                                <h1 className='text-xl'>Begin: Enviroment xxxxxxxx.yyyyyyyyy</h1>
-                                <AiFillCheckCircle className='font-bold mr-40'/>
-                            </div>
-                        </div>
+                        <ListUnit/>
                     </div>
                     <div className='model__navbar'>
                         <div className='text-center pt-24'>

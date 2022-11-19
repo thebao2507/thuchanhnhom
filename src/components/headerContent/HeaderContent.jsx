@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { MdAccountCircle } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
-import './header.scss';
+import './headerContent.scss';
+import { MdSkipNext } from 'react-icons/md';
+import { RiSkipBackMiniFill } from 'react-icons/ri';
+import {RiHomeLine} from 'react-icons/ri';
+
 
 const MENU_ITEMS = [
     {
@@ -19,9 +23,15 @@ const MENU_ITEMS = [
     }
 ]
 
-const Header = () => {
-
+const HeaderContent = ({ id }) => {
+    const [idlink, setIdlink] = useState(Number(id));
     const [visible, setVisible] = useState(false);
+
+    const idnext = () => {if(Number(id) < 4) { const number = Number(id) + 1; return number} else return 4; };
+    const idback = () => {if(Number(id) > 1) { const number = Number(id) - 1; return number} else return 1; };
+
+    const linkNext = '/unit/' + idnext();
+    const linkback = '/unit/' + idback();
 
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -40,7 +50,11 @@ const Header = () => {
     return (
         <div className='relative'>
             <div className='fixed w-full h-12 bg-neutral-400 top-0 left-0 right-0 flex items-center justify-between px-6 z-1'>
-                <Link to='/home'><h1 className='text-xl font-medium text-black'>English Web Quiz</h1></Link>
+                <div className='flex'>
+                    <i className='text-3xl px-2 font-medium text-black' onClick={() => window.alert("back to previous lesson")}><Link to={linkback}><RiSkipBackMiniFill /></Link></i>
+                    <i className='text-3xl px-2 font-medium text-black'><Link to='/home'><RiHomeLine/></Link></i>
+                    <i className='text-3xl px-2 font-medium text-black' onClick={() => window.alert("next to the lesson")}><Link to={linkNext}><MdSkipNext /></Link></i>
+                </div>
                 <input
                     type="text"
                     placeholder='Search'
@@ -54,7 +68,7 @@ const Header = () => {
                         visible={visible}
                         placement='bottom-end'
                         render={attrs => (
-                            <div className="h-[100px] w-[140px] menu__items z-1 border-2" tabIndex="-1" {...attrs}>
+                            <div className="h-[100px] w-[140px] menu__items z-1" tabIndex="-1" {...attrs}>
                                 {renderItems()}
                             </div>
                         )}
@@ -69,4 +83,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default HeaderContent;

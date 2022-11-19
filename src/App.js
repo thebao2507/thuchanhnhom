@@ -3,6 +3,8 @@ import SignUp from "./pages/signup/SignUp";
 import Infor from "./pages/infor/Infor";
 import Home from "./pages/home/Home";
 import {Route, Routes} from 'react-router-dom';
+import Content from "./pages/content/Content";
+import Quiz from "./pages/quiz/Quiz";
 
 function App() {
     return (
@@ -12,6 +14,8 @@ function App() {
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/infor" element={<Infor/>}/>
+                <Route path="/unit/:id" element={<Content/>}/>
+                <Route path="/quiz/:id" element={<Quiz/>}/>
             </Routes>
         </>
     );
