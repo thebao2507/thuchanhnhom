@@ -9,6 +9,50 @@ import { MdSkipNext } from 'react-icons/md';
 import { RiSkipBackMiniFill } from 'react-icons/ri';
 import { RiHomeLine } from 'react-icons/ri';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import useDebounce from '../../hook/useDebounce';
+
+const listContentUnit = [
+    {
+        id: 1,
+        name: 'Unit 1',
+        overview: 'Begin: Environment xxxxxxxxxxxx',
+        contents: [
+            { content: 'introduction' },
+            { content: 'concept for lol' }
+        ],
+        check: true,
+    },
+    {
+        id: 2,
+        name: 'Unit 2',
+        overview: 'Begin: Environment xxxxxxxxxxxx',
+        contents: [
+            { content: 'introduction' },
+            { content: 'concept for lol' }
+        ],
+        check: true,
+    },
+    {
+        id: 3,
+        name: 'Unit 3',
+        overview: 'Begin: Environment zzzzzzzzz',
+        contents: [
+            { content: 'introduction' },
+            { content: 'con chim 123' }
+        ],
+        check: false,
+    },
+    {
+        id: 4,
+        name: 'Unit 4',
+        overview: 'Begin: Environment yyyyyyyyyy',
+        contents: [
+            { content: 'introduction' },
+            { content: 'concept for lol' }
+        ],
+        check: false,
+    },
+]
 
 
 const MENU_ITEMS = [
@@ -32,11 +76,13 @@ const HeaderContent = ({ id }) => {
     const [searchValue, setSearchValue] = useState('');
     const [showResult, setShowResult] = useState(true);
 
+    const debounce = useDebounce(searchValue, 1000);
+
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3, 4]);
-        }, 3000)
-    }, []);
+        const found = listContentUnit.filter(p => p.name === debounce || p.overview === debounce || p.contents.find(y => y.content === debounce));
+        setSearchResult(found.map(p => p));
+    }, [debounce]);
+
 
     const handleClear = () => {
         setSearchValue('');
@@ -77,11 +123,16 @@ const HeaderContent = ({ id }) => {
                     render={(attrs) => (
                         <div className='w-[300px]' tabIndex="-1" {...attrs}>
                             <div className='wrapper'>
-                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
-                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
-                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
-                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
-                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
+                                {
+                                    searchResult.map((item) => (
+                                        <Link to={`/unit/${item.id}`}>
+                                            <div className='px-3 py-3 border-b-2 wrapper__item'>
+                                                <h1>{item.name}</h1>
+                                                <div>{item.overview}</div>
+                                            </div>
+                                        </Link>
+                                    ))
+                                }
                             </div>
                         </div>
                     )}
