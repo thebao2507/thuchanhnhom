@@ -1,10 +1,56 @@
 import Tippy from '@tippyjs/react/headless';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { MdAccountCircle } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import useDebounce from '../../hook/useDebounce';
 import './header.scss';
+
+
+const listContentUnit = [
+    {
+        id: 1,
+        name: 'Unit 1',
+        overview: 'Begin: Environment xxxxxxxxxxxx',
+        contents: [
+            { content: 'introduction' },
+            { content: 'concept for lol' }
+        ],
+        check: true,
+    },
+    {
+        id: 2,
+        name: 'Unit 2',
+        overview: 'Begin: Environment xxxxxxxxxxxx',
+        contents: [
+            { content: 'introduction' },
+            { content: 'concept for lol' }
+        ],
+        check: true,
+    },
+    {
+        id: 3,
+        name: 'Unit 3',
+        overview: 'Begin: Environment zzzzzzzzz',
+        contents: [
+            { content: 'introduction' },
+            { content: 'con chim 123' }
+        ],
+        check: false,
+    },
+    {
+        id: 4,
+        name: 'Unit 4',
+        overview: 'Begin: Environment yyyyyyyyyy',
+        contents: [
+            { content: 'introduction' },
+            { content: 'concept for lol' }
+        ],
+        check: false,
+    },
+]
 
 const MENU_ITEMS = [
     {
@@ -20,6 +66,21 @@ const MENU_ITEMS = [
 ]
 
 const Header = () => {
+    const [searchResult, setSearchResult] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+    const [showResult, setShowResult] = useState(true);
+
+    const debounce = useDebounce(searchValue, 1000);
+
+    useEffect(() => {
+        const found = listContentUnit.filter(p => p.name === debounce || p.overview === debounce || p.contents.find(y => y.content === debounce));
+        setSearchResult(found.map(p => p));
+    }, [debounce]);
+
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResult([]);
+    }
 
     const [visible, setVisible] = useState(false);
 
@@ -41,11 +102,44 @@ const Header = () => {
         <div className='relative'>
             <div className='fixed w-full h-12 bg-neutral-400 top-0 left-0 right-0 flex items-center justify-between px-6 z-1'>
                 <Link to='/home'><h1 className='text-xl font-medium text-black'>English Web Quiz</h1></Link>
-                <input
-                    type="text"
-                    placeholder='Search'
-                    className='w-[300px] h-10 p-4 rounded-2xl placeholder:font-semibold font-semibold text-black input__search'
-                />
+                <Tippy
+                    visible={searchResult.length > 0 && showResult}
+                    interactive
+                    render={(attrs) => (
+                        <div className='w-[300px]' tabIndex="-1" {...attrs}>
+                            <div className='wrapper'>
+                                {
+                                    searchResult.map((item) => (
+                                        <Link to={`/unit/${item.id}`}>
+                                            <div className='px-3 py-3 border-b-2 wrapper__item'>
+                                                <h1>{item.name}</h1>
+                                                <div>{item.overview}</div>
+                                            </div>
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    )}
+                    onClickOutside={() => setShowResult(false)}
+                >
+                    <div className='w-[300px] bg-white rounded-2xl flex justify-between'>
+                        <input
+                            value={searchValue}
+                            type="text"
+                            placeholder='Search'
+                            spellCheck={false}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            onFocus={() => setShowResult(true)}
+                            className='h-10 p-4 ml-8 rounded-2xl outline-none placeholder:font-semibold font-semibold text-black input__search'
+                        />
+                        {!!searchValue && (
+                            <button className='mr-4' onClick={handleClear}>
+                                <AiFillCloseCircle />
+                            </button>
+                        )}
+                    </div>
+                </Tippy>
                 <div className='flex items-center h-full w-[120px] justify-around'>
                     <h3 className='text-black font-semibold'>Hello user</h3>
                     <Tippy

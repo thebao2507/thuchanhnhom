@@ -1,5 +1,5 @@
 import Tippy from '@tippyjs/react/headless';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { MdAccountCircle } from 'react-icons/md';
@@ -7,7 +7,8 @@ import { CiLogout } from 'react-icons/ci';
 import './headerContent.scss';
 import { MdSkipNext } from 'react-icons/md';
 import { RiSkipBackMiniFill } from 'react-icons/ri';
-import {RiHomeLine} from 'react-icons/ri';
+import { RiHomeLine } from 'react-icons/ri';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 
 const MENU_ITEMS = [
@@ -27,8 +28,23 @@ const HeaderContent = ({ id }) => {
     const [idlink, setIdlink] = useState(Number(id));
     const [visible, setVisible] = useState(false);
 
-    const idnext = () => {if(Number(id) < 4) { const number = Number(id) + 1; return number} else return 4; };
-    const idback = () => {if(Number(id) > 1) { const number = Number(id) - 1; return number} else return 1; };
+    const [searchResult, setSearchResult] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+    const [showResult, setShowResult] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setSearchResult([1, 2, 3, 4]);
+        }, 3000)
+    }, []);
+
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResult([]);
+    }
+
+    const idnext = () => { if (Number(id) < 4) { const number = Number(id) + 1; return number } else return 4; };
+    const idback = () => { if (Number(id) > 1) { const number = Number(id) - 1; return number } else return 1; };
 
     const linkNext = '/unit/' + idnext();
     const linkback = '/unit/' + idback();
@@ -52,14 +68,42 @@ const HeaderContent = ({ id }) => {
             <div className='fixed w-full h-12 bg-neutral-400 top-0 left-0 right-0 flex items-center justify-between px-6 z-1'>
                 <div className='flex'>
                     <i className='text-3xl px-2 font-medium text-black' onClick={() => window.alert("back to previous lesson")}><Link to={linkback}><RiSkipBackMiniFill /></Link></i>
-                    <i className='text-3xl px-2 font-medium text-black'><Link to='/home'><RiHomeLine/></Link></i>
+                    <i className='text-3xl px-2 font-medium text-black'><Link to='/home'><RiHomeLine /></Link></i>
                     <i className='text-3xl px-2 font-medium text-black' onClick={() => window.alert("next to the lesson")}><Link to={linkNext}><MdSkipNext /></Link></i>
                 </div>
-                <input
-                    type="text"
-                    placeholder='Search'
-                    className='w-[300px] h-10 p-4 rounded-2xl placeholder:font-semibold font-semibold text-black input__search'
-                />
+                <Tippy
+                    visible={searchResult.length > 0 && showResult}
+                    interactive
+                    render={(attrs) => (
+                        <div className='w-[300px]' tabIndex="-1" {...attrs}>
+                            <div className='wrapper'>
+                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
+                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
+                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
+                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
+                                <h1 className='px-3 py-3 border-b-2'>ccc</h1>
+                            </div>
+                        </div>
+                    )}
+                    onClickOutside={() => setShowResult(false)}
+                >
+                    <div className='w-[300px] bg-white rounded-2xl flex justify-between'>
+                        <input
+                            value={searchValue}
+                            type="text"
+                            placeholder='Search'
+                            spellCheck={false}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            onFocus={() => setShowResult(true)}
+                            className='h-10 p-4 ml-8 rounded-2xl outline-none placeholder:font-semibold font-semibold text-black input__search'
+                        />
+                        {!!searchValue && (
+                            <button className='mr-4' onClick={handleClear}>
+                                <AiFillCloseCircle />
+                            </button>
+                        )}
+                    </div>
+                </Tippy>
                 <div className='flex items-center h-full w-[120px] justify-around'>
                     <h3 className='text-black font-semibold'>Hello user</h3>
                     <Tippy

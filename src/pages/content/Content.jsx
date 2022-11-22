@@ -55,7 +55,7 @@ const Content = () => {
     return (
         <>
             <HeaderContent id={id} />
-            <div className='w-full mt-12 h-screen body__content'>
+            <div className='w-full mt-12 h-full body__content'>
                 <div className='w-[98%] h-full bg-slate-50 mx-auto'>
                     <div>
                         <h1 className='text-2xl font-semibold pl-3 pt-3'>{data.name}</h1>
